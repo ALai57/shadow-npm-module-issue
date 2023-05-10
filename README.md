@@ -1,46 +1,43 @@
-# andrewslai
-
-My personal website's frontend
-
-Eventually, I hope to turn this project into a blogging platform where users can
-easily create and publish blog content.
-
-## What's included:
-
-     Front end: Re-frame SPA written in Clojurescript
-
-# Installation
-## Clojurescript
+# Shadow CLJS compilation issue reproduction
 
 
-# Development
-For local development using Storybook
+Transpile JSX to JS
 ``` sh
-// Rebuild every time the program is changed and start Storybook
+npx babel src/issue-js --out-dir src/issue --watch
+```
+
+Start shadow build. This will emit `:npm-module`s, where each module is a storybook story.
+``` sh
 npm run watch
-npm run storybook
-
-// Serve from andrewslai for E2E development
-cd <PATH>/andrewslai
-source .env.local
-lein run
-
 ```
-# Deployment
-To deploy,
-(1) Build a `release` artifact.
-(2) Deploy the release artifact to S3.
+
+Start storybook
 
 ``` sh
-npm run build-release
-npm run deploy
+npm run storybook
 ```
 
-TODO:
-;; Add button to go back to article manager from editor
-;; Check saving and creating articles
-;; Add confirmation modal when someone clicks delete or publish icons
-;; Refetch list of articles after a new one is added
-;; Add config button to change URL, etc
 
-;; Add bar showing the branch that was edited to article manager
+Navigate to storybook to see that there is a working component `issue.component`, and a broken component `issue.broken-component`
+
+
+The output from the file
+`resources/public/js/compiled/shareable_stories/module$issue$js$Example.js` seems to be broken because the module cannot load React.
+
+Here's a snippet from the file that illustrates the issue. The `(require("shadow.js.shim.module$react"))` statement doesn't return the module, so the `_react` var doesn't have an actual link to the React module. 
+
+``` javascript
+shadow$provide.module$issue$js$Example = function(global, require, module, exports) {
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    exports.example = function() {
+        return _react.default.createElement("h1", null, "This was compiled from JSX")
+    };
+    var _react = function(obj) {
+        return obj && obj.__esModule ? obj : {
+            default: obj
+        }
+    }(require("shadow.js.shim.module$react"))
+}
+```

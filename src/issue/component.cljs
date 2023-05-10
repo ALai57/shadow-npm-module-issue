@@ -1,9 +1,7 @@
 (ns issue.component
-  (:require [reagent.core :as r]
-            ["./js/Example" :refer [example]]))
+  (:require [reagent.core :as r]))
 
 (defn my-component
   []
   [:div
-   [:div "Hello"]
-   [example]])
+   [:div "Hello"]])
