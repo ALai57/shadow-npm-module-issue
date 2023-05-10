@@ -2,6 +2,11 @@
 
 From the project root directory `shadow-npm-module-issue`:
 
+Install deps
+``` sh
+npm install
+```
+
 Transpile JSX to JS
 ``` sh
 npx babel src/issue-js --out-dir src/issue --watch
