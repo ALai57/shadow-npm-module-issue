@@ -19,6 +19,7 @@ npm run storybook
 
 
 Navigate to storybook to see that there is a working component `issue.component`, and a broken component `issue.broken-component`
+[Image of the console showing the error leading to the broken stories](./storybook-ui-showing-broken-component.png)
 
 
 The output from the file
