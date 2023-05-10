@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.myComponent = myComponent;
+exports.example = example;
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function myComponent() {
-  return /*#__PURE__*/_react.default.createElement("h1", null, "JSX! AND MORE AND MORE and less and more again");
+function example() {
+  return /*#__PURE__*/_react.default.createElement("h1", null, "This was compiled from JSX");
 }
