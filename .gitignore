@@ -1,0 +1,23 @@
+target/*
+out
+.nrepl-port
+.rebel_readline_history
+figwheel_server.log
+*.env*
+*.lein-repl-history
+.lein-failures
+log.txt
+node_modules
+build-reports
+resources/public/js/compiled/
+resources/public/js/test/
+/public/
+
+.idea/
+*.iml
+.shadow-cljs/
+
+# EMACS garbage
+*#*#*
+
+src/kaleidoscope/ui/components/js/*
